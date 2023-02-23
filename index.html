@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Temperature Converter</title>
+    <style>
+      body {
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        text-align: center;
+        background-image: url("back.png");
+        background-size: 270px;
+      }
+
+      h1 {
+        margin-top: 10%;
+        color: #2e86c1;
+      }
+
+      input[type="number"] {
+        height: 50px;
+        font-size: 18px;
+        text-align: center;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin-bottom: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+      
+      input[type="number"]:focus {
+        outline: none;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+      }
+      label {
+        font-size: 20px;
+        margin-top: 5%;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #676c6e;
+      }
+      .button {
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.8);
+        background: #2e86c1;
+        padding: 15px 40px;
+        border-radius: 4px;
+        font-weight: 400;
+        text-transform: uppercase;
+        transition: all 0.2s ease-in-out;
+      }
+      .glow-button:hover {
+        color: rgba(255, 255, 255, 1);
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(2, 33, 61, 0.4);
+      }
+      #result {
+        margin-top: 20px;
+        font-weight: bold;
+        font-size: 24px;
+        color: #2e86c1;
+      }
+
+      .container {
+        max-width: 500px;
+        margin: 100px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .temperature{
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Temperature Converter</h1><hr width="100px" size="5" noshade="10" color="#2e86c1">
+      <div class="temperature">
+        <label>
+          Celsius:
+          <input type="number" id="celsiusInput" />
+        </label>
+        <br />
+        <label>
+          Fahrenheit:
+          <input type="number" id="fahrenheitInput" />
+        </label>
+      </div>
+      <br />
+      <a id="clearButton" class="glow-button button">&nbsp;&nbsp;&nbsp;Clear&nbsp;&nbsp;&nbsp;</a>
+      <a id="convertButton" class="glow-button button">Convert</a><br><br>
+      <div id="result"></div>
+    </div>
+
+    <script>
+      const celsiusInput = document.getElementById("celsiusInput");
+      const fahrenheitInput = document.getElementById("fahrenheitInput");
+      const convertButton = document.getElementById("convertButton");
+      const clearButton = document.getElementById("clearButton");
+      const result = document.getElementById("result");
+
+      convertButton.addEventListener("click", () => {
+        if (celsiusInput.value) {
+          const celsius = parseFloat(celsiusInput.value);
+          const fahrenheit = (celsius * 9) / 5 + 32;
+          fahrenheitInput.value = fahrenheit.toFixed(2);
+          result.innerText = " ";
+        } else if (fahrenheitInput.value) {
+          const fahrenheit = parseFloat(fahrenheitInput.value);
+          const celsius = ((fahrenheit - 32) * 5) / 9;
+          celsiusInput.value = celsius.toFixed(2);
+          result.innerText = " ";
+        } else {
+          result.innerText = "Please enter a temperature to convert.";
+        }
+      });
+      clearButton.addEventListener("click", () => {
+          celsiusInput.value = null;
+          fahrenheitInput.value = null;
+          result.innerText = " ";
+      });
+    </script>
+  </body>
+</html>
